@@ -33,20 +33,12 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-<<<<<<< HEAD
 
     implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
-=======
-    developmentOnly 'org springframework. boot: spring-boot-devtools'
-    implementation 'io.jsonwebtoken:jjwt:0.9.1'
-    implementation 'mysalimysal-connector-iava:8.0.28'
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
->>>>>>> 58e75c5162c4b53b8b8f86871da1aff4da697829
 }
 
 tasks.named('test') {
