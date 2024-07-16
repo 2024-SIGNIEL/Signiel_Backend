@@ -2,7 +2,6 @@ package com.example.fino.domain.user.domain.auth.application;
 
 import com.example.fino.domain.user.domain.user.dao.UserRepository;
 import com.example.fino.domain.user.domain.user.domain.User;
-import com.example.fino.domain.user.domain.user.domain.type.Role;
 import com.example.fino.domain.user.domain.user.dto.UserDto;
 import com.example.fino.global.security.auth.AuthDetails;
 import com.example.fino.global.security.auth.AuthDetailsService;
@@ -64,7 +63,4 @@ public class AuthService {
         // 실제 토큰에서 사용자명 추출 로직 구현
         return token;
     }
-
-
-    }
-
+}

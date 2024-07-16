@@ -1,15 +1,17 @@
 package com.example.fino.domain.user.domain.auth.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 @Getter
 @NoArgsConstructor
 public class RefreshToken {
+
     @Id
     private String username;
     private String token;
