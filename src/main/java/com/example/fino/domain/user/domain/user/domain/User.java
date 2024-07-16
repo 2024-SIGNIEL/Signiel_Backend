@@ -14,10 +14,10 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(20)")
+
     private String username;
 
-    @Column(columnDefinition = "VARCHAR(25)")
+
     private String password;
 
     //새로 추가

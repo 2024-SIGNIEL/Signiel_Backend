@@ -65,6 +65,6 @@ public class AuthService {
         return token;
     }
 
-    public void register(String username, String password, Role role) {
+
     }
-}
+
