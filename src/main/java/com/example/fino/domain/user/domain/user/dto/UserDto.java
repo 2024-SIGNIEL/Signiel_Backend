@@ -1,5 +1,6 @@
 package com.example.fino.domain.user.domain.user.dto;
 
+import com.example.fino.domain.user.domain.user.domain.type.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,4 +12,5 @@ public class UserDto {
 
     private String username;
     private String password;
+    private Role role;
 }
