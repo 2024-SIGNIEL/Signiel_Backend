@@ -13,6 +13,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthDetailsService authDetailsService;
 
+    @Transactional
     public void register(UserDto userDto) {
         // 회원 가입을 할 시
         if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
@@ -38,6 +40,7 @@ public class AuthService {
         userRepository.save(user);
     }
 
+    @Transactional
     public String authenticate(String username, String password) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
