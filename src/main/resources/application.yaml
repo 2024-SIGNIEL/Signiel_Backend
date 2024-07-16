@@ -1,11 +1,18 @@
+jwt:
+  header: "Authorization"
+  prefix: "Bearer"
+  secret: "제발"
+  accessExpiration: 3600
+  refreshExpiration: 604800
+
 spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/fino?useSSL=false&allowPublicKeyRetrieval=true
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: root
+    password: 1234
   servlet:
     multipart:
       max-file-size: 10MB
@@ -16,3 +23,5 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+
