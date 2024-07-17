@@ -46,7 +46,6 @@ public class JwtTokenProvider {
     private String generateToken(String id, String type, Long exp) {
 
         // generateAcessToken을 만들어주는 실제 메소드
-
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
                 .setSubject(id)
