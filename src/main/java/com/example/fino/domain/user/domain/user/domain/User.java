@@ -20,6 +20,8 @@ public class User{
 
     private String password;
 
+    private String name;
+
     //새로 추가
     private Role role;
 

@@ -52,6 +52,7 @@ public class JwtTokenProvider {
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + exp * 1000))
                 .compact();
+
     }
 
     public String resolveToken(HttpServletRequest request) {

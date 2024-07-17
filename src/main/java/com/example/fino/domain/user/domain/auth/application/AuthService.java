@@ -27,14 +27,15 @@ public class AuthService {
     @Transactional
     public void register(UserDto userDto) {
         // 회원 가입을 할 시
-        if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
-            throw new IllegalStateException("Username already taken");
-        }
+        userRepository.findByUsername(userDto.getUsername())
+                .ifPresent(user -> { throw new IllegalStateException("Username already taken"); });
+
 
         String encodedPassword = passwordEncoder.encode(userDto.getPassword());
         User user = User.builder()
                 .username(userDto.getUsername())
                 .password(encodedPassword)
+                .name(userDto.getName())
                 .role(userDto.getRole())
                 .build();
         userRepository.save(user);
