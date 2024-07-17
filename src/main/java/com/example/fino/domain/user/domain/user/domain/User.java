@@ -29,6 +29,7 @@ public class User {
     @Column(length = 255)
     private String password;
 
+    @Column(length = 4)
     private String name;
 
     //새로 추가

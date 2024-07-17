@@ -31,7 +31,13 @@ public class AuthService {
 
     @Transactional
     public void register(UserDto userDto) {
-        // 회원 가입을 할 시
+
+        String name = userDto.getName();
+
+        if(name.length() > 4){
+            throw new IllegalArgumentException("Username length must not exceed 4 characters");
+        }
+
         userRepository.findByUsername(userDto.getUsername())
                 .ifPresent(user -> { throw new IllegalStateException("Username already taken"); });
 
