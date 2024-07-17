@@ -12,5 +12,4 @@ public class FinoApplication {
     public static void main(String[] args) {
         SpringApplication.run(FinoApplication.class, args);
     }
-
 }

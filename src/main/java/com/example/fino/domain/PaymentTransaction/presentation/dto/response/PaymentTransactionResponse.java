@@ -9,7 +9,7 @@ public class PaymentTransactionResponse {
 
         private Long id;
         private String accountHolder;
-        private Double amount;
+        private double amount;
         private String transactionDate;
         private String usageLocation;
 }
