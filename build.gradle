@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.1'
+    id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.1.5'
 }
 
@@ -24,24 +24,50 @@ repositories {
 }
 
 dependencies {
+    // jpa
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // validation
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+    // configuration
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+
+    // web
     implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // lombok
     compileOnly 'org.projectlombok:lombok'
-    runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
+
+    // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
-    implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
-    implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
+    //redis
+    implementation 'org.springframework.data:spring-data-redis'
 
+<<<<<<< HEAD
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+=======
+    // db connectors
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+
+    // jwt
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+>>>>>>> d4b43ab0ff2a38edd772d9f8bbf8f283e60b8d1d
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
+apply plugin: 'java'

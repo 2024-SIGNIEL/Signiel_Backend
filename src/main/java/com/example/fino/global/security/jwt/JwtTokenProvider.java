@@ -2,17 +2,19 @@ package com.example.fino.global.security.jwt;
 
 import com.example.fino.domain.user.domain.auth.dao.RefreshTokenRepository;
 import com.example.fino.domain.user.domain.auth.domain.RefreshToken;
-import com.example.fino.global.security.auth.AuthDetails;
 import com.example.fino.global.security.auth.AuthDetailsService;
-import io.jsonwebtoken.*;
-import jakarta.servlet.http.HttpServletRequest;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-
+import javax.servlet.http.HttpServletRequest;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -44,7 +46,6 @@ public class JwtTokenProvider {
     private String generateToken(String id, String type, Long exp) {
 
         // generateAcessToken을 만들어주는 실제 메소드
-
         return Jwts.builder()
                 .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecret())
                 .setSubject(id)
@@ -80,7 +81,6 @@ public class JwtTokenProvider {
         try {
             return Jwts.parser()
                     .setSigningKey(jwtProperties.getSecret())
-                    .build()
                     .parseClaimsJws(token)
                     .getBody();
         } catch (ExpiredJwtException e) {

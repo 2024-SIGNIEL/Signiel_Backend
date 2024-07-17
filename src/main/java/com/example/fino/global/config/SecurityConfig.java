@@ -1,46 +1,41 @@
 package com.example.fino.global.config;
 
-import com.example.fino.global.security.jwt.JwtTokenFilter;
 import com.example.fino.global.security.jwt.JwtTokenProvider;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
+public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final ObjectMapper objectMapper;
     private final AuthenticationConfiguration authenticationConfiguration;
 
-
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
     }
 
     @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         // 이 메서드는 해당 객체를 빈으로 등록하고 암호화하는데 사용된다.
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // 이 메소드는 'HttpSecurity' 객체를 사용하여 보안 설정을 구성하고,
         // 'SecurityFilterChain'을 빈으로 등록한다.
 
@@ -55,17 +50,17 @@ public class SecurityConfig  {
 
         //요청에 대한 관한을 설정한다.
         http
-                .authorizeHttpRequests((auth)->auth
-                        .requestMatchers("auth/register","/","auth/login").permitAll()
+                .authorizeRequests((auth) -> auth
+                        .antMatchers("/auth/register", "/", "/auth/login").permitAll()
                         // 해당 경로에 대한 모든 접근을 허용한다.
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .antMatchers("/admin").hasRole("ADMIN")
                         // "/admin"이라는 경로는 역할이 "ADMIN"인 사람만 접근할 수 있다.
                         .anyRequest().authenticated());
         // 다른 모든 요청은 인증된 사용자만 접근할 수 있다.
 
         //세션 설정
         http
-                .sessionManagement((session)->session
+                .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         // 세션 : STATELESS, 비활성화 시킴
 
