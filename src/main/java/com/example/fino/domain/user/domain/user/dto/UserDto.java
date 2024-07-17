@@ -2,6 +2,7 @@ package com.example.fino.domain.user.domain.user.dto;
 
 import com.example.fino.domain.user.domain.user.domain.type.Role;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 

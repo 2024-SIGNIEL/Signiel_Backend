@@ -13,7 +13,6 @@ public class PaymentTransactionService {
 
     private final PaymentTransactionRepository paymentTransactionRepository;
 
-
     @Transactional
     public void createFeed(PaymentTransactionRequest request) {
 
