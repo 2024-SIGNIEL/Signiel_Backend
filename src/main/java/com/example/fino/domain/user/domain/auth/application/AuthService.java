@@ -5,6 +5,9 @@ import com.example.fino.domain.user.domain.user.domain.User;
 import com.example.fino.domain.user.domain.user.dto.UserDto;
 import com.example.fino.global.security.auth.AuthDetails;
 import com.example.fino.global.security.auth.AuthDetailsService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +17,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -22,6 +27,7 @@ public class AuthService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthDetailsService authDetailsService;
+    private final String SECRET_KEY = "your_secret_key";  // 비밀키
 
     @Transactional
     public void register(UserDto userDto) {
@@ -41,6 +47,9 @@ public class AuthService {
 
     @Transactional
     public String authenticate(String username, String password) {
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            throw new IllegalArgumentException("Username or password is empty");
+        }
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(username, password)
         );
@@ -55,12 +64,23 @@ public class AuthService {
     }
 
     private String generateToken(String username) {
-        // 실제 토큰 생성 로직 구현
-        return username;
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + 86400000); // 토큰 유효기간 1일
+
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(now)
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                .compact();
     }
 
     private String getUsernameFromToken(String token) {
-        // 실제 토큰에서 사용자명 추출 로직 구현
-        return token;
+        Claims claims = Jwts.parser()
+                .setSigningKey(SECRET_KEY)
+                .parseClaimsJws(token)
+                .getBody();
+
+        return claims.getSubject();
     }
 }
